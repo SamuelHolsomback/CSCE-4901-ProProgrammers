@@ -2,36 +2,37 @@ import REACT, { Component } from 'react';
 import REACTDOM from 'react-dom';
 import MainCSS from './main.module.css';
 import graph from './images/graph.png';
-import helppic from './images/help1.png';
+import {Tips} from './Tips.js';
+import { Health } from './Gauge';
+import diaper from './images/diaper.png';
+import bottle from './images/bottle.png';
+import sleep from './images/sleep.png';
+import {gradeBath} from './review.js';
+import {gradeSleep} from './review.js';
+import {gradeEating} from './review.js';
+import {ChildrenList} from './childrenList.js';
 
+export class Main extends Component{
+    handleClick(e){}
 
-class Main extends Component{
     render(){
         return(
-            <body style={{marginTop: "0px", width: "1350px", backgroundColor: "#03dbfc"}}>
-                <script src="main_functions.js"></script>
+            <body style={{marginTop: "0px", width: "100%", backgroundColor: "#03dbfc"}}>
                 <h1 className={MainCSS.title}>BabyTracker</h1>
                 <div className={MainCSS.navbar}>
-                    <div className={MainCSS.help}>
-                        <button className={MainCSS.helpbtn} onclick="displayHelp()" height="50" width="50"><img src={helppic} className={MainCSS.helpimg} height="50" width="50" alt="Help"/></button>
-                        <div id="help" className={MainCSS.help_content}>
-                            <p>
-                                Thiis is text.
-                            </p>
-                        </div>
-                    </div>
-                    <button className={MainCSS.nav}>Bath</button>
+                    <ChildrenList/>
+                    <button className={MainCSS.nav} style={{marginLeft: "140px"}}>Bath</button>
                     <button className={MainCSS.nav}>Sleep</button>
                     <button className={MainCSS.nav}>Eating</button>
                     <button className={MainCSS.logout}>Log Out</button> 
                 </div>
-                <div style={{display: "flex", borderBottom: "2px solid grey", backgroundColor: "white"}}>
-                    <div style={{width: "990px"}}>
+                <div style={{position: "relative", display: "flex", borderBottom: "2px solid grey", backgroundColor: "white", zIndex: "0", width: "100%" }}>
+                    <div style={{width: "50%"}}>
                         <table>
                             <tr style={{display: "flex"}}>
                                 <div style={{width: "400px"}}>
                                     <h1>Bath Overview</h1>
-                                    <img src={graph} width="280" height="280" alt="no image"/>
+                                    <Health color="green" grade={gradeBath()} src={diaper} status={graph}/>
                                 </div>
                                 <div>
                                     <h1>Summary</h1>
@@ -41,7 +42,7 @@ class Main extends Component{
                             <tr style={{display: "flex"}}>
                                 <div style={{width: "400px"}}>
                                     <h1>Sleeping Overview</h1>
-                                    <img src={graph} width="280" height="280" alt="no image"/>
+                                    <Health color="green" grade={gradeSleep()} src={sleep} status={graph}/>
                                 </div>
                                 <div>
                                     <h1>Summary</h1>
@@ -51,7 +52,7 @@ class Main extends Component{
                             <tr style={{display: "flex"}}>
                                 <div style={{width: "400px"}}>
                                     <h1>Eating Overview</h1>
-                                    <img src={graph} width="280" height="280" alt="no image"/>
+                                    <Health color="green" grade={gradeEating()} src={bottle} status={graph}/>
                                 </div>
                                 <div>
                                     <h1>Summary</h1>
@@ -61,10 +62,21 @@ class Main extends Component{
                         </table>
                     </div>
                     <div>
-                        <h1 style={{fontSize: "23px"}}>Date: 10/27/2021    Time: 4:51 AM</h1>
-                        <h1 style={{fontSize: "23px"}}>Baby Name: namevalue</h1>
-                        <h1 style={{fontSize: "23px"}}>Age: agevalue</h1>
-                        <button className={MainCSS.makeapp}>Make Appointment</button>
+                        <div style={{display: "flex"}}>
+                            <div style={{marginLeft: "100px"}}>
+                                <h1 style={{fontSize: "23px"}}>Name: namevalue</h1>
+                                <h1 style={{fontSize: "23px"}}>Age: agevalue</h1>
+                                <h1 style={{fontSize: "23px"}}>Height: heightvalue</h1>
+                                <h1 style={{fontSize: "23px"}}>Weight: weightvalue</h1>
+                                <button className={MainCSS.makeapp}>Make Appointment</button>
+                            </div>
+                        </div>
+                        <div style={{display: "stack", marginTop: "30px", marginLeft: "30px"}}>
+                                <button className={MainCSS.add}> + Add Child</button>
+                        </div>
+                        <div style={{marginTop: "100px"}}>
+                            <Tips/>
+                        </div>
                     </div>
                 </div>
                 <div style={{height: "60px", margin: "auto", backgroundColor: "white"}}>
@@ -77,5 +89,3 @@ class Main extends Component{
     }
 }
 
-
-export const main_menu = <Main/>;
