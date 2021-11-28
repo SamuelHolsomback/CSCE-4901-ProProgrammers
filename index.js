@@ -67,6 +67,82 @@ app.post('/bathroom', (req, res)=> {
     });
 })
 
+app.post('/eating-bottle', (req, res)=> {
+    const date1Value = req.body.date1;
+    const date2Value = req.body.date2;
+    const date3Value = req.body.date3;
+    const date4Value = req.body.date4;
+    const date5Value = req.body.date5;
+    const date6Value = req.body.date6;
+    const date7Value = req.body.date7;
+    const amount1Value = req.body.amount1;
+    const amount2Value = req.body.amount2;
+    const amount3Value = req.body.amount3;
+    const amount4Value = req.body.amount4;
+    const amount5Value = req.body.amount5;
+    const amount6Value = req.body.amount6;
+    const amount7Value = req.body.amount7;
+
+    db.query("UPDATE eating_bottle SET Date1 = ?, Amount1 = ?, Date2 = ?, Amount2 = ?, Date3 = ?, Amount3 = ?, Date4 = ?, Amount4 = ?, Date5 = ?, Amount5 = ?, Date6 = ?, Amount6 = ?, Date7 = ?, Amount7 = ? WHERE Baby = 'Test'",
+    [date1Value, amount1Value, date2Value, amount2Value, date3Value, amount3Value, date4Value, amount4Value, date5Value, amount5Value, date6Value, amount6Value, date7Value, amount7Value],
+    (err, result)=> {
+        console.log(err);
+    });
+})
+
+app.post('/get-eating-bottle', (req, res)=> {
+    const baby = req.body.babyName;
+
+    db.query("SELECT * FROM eating_bottle WHERE Baby = ?",
+    [baby],
+    (err, result) => {
+        if (result.length > 0) {
+            res.send(result)
+        }
+        else {
+            res.send({message: "No prior log entries!"})
+        }
+    });
+})
+
+app.post('/eating-breast', (req, res)=> {
+    const date1Value = req.body.date1;
+    const date2Value = req.body.date2;
+    const date3Value = req.body.date3;
+    const date4Value = req.body.date4;
+    const date5Value = req.body.date5;
+    const date6Value = req.body.date6;
+    const date7Value = req.body.date7;
+    const time1Value = req.body.time1;
+    const time2Value = req.body.time2;
+    const time3Value = req.body.time3;
+    const time4Value = req.body.time4;
+    const time5Value = req.body.time5;
+    const time6Value = req.body.time6;
+    const time7Value = req.body.time7;
+
+    db.query("UPDATE eating_breast SET Date1 = ?, Time1 = ?, Date2 = ?, Time2 = ?, Date3 = ?, Time3 = ?, Date4 = ?, Time4 = ?, Date5 = ?, Time5 = ?, Date6 = ?, Time6 = ?, Date7 = ?, Time7 = ? WHERE Baby = 'Test'",
+    [date1Value, time1Value, date2Value, time2Value, date3Value, time3Value, date4Value, time4Value, date5Value, time5Value, date6Value, time6Value, date7Value, time7Value],
+    (err, result)=> {
+        console.log(err);
+    });
+})
+
+app.post('/get-eating-breast', (req, res)=> {
+    const baby = req.body.babyName;
+
+    db.query("SELECT * FROM eating_breast WHERE Baby = ?",
+    [baby],
+    (err, result) => {
+        if (result.length > 0) {
+            res.send(result)
+        }
+        else {
+            res.send({message: "No prior log entries!"})
+        }
+    });
+})
+
 app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
