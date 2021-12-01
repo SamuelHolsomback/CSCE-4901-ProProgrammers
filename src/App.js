@@ -1,24 +1,8 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import Bar from "./component/Progression";
 import Sleeping from "./component/Sleeping";
 import Header from "./component/Header";
-import { ThemeContext, themes } from "./Context/ThemeContext";
 
-const intial = themes.light;
-// let theme;
-const reducerTheme = (state = [], action) => {
-  switch (action) {
-    case "Dark":
-      [action];
-      break;
-    case "Light":
-      theme = themes.light;
-      break;
-    default:
-      theme = themes.light;
-      break;
-  }
-};
 function App() {
   const [calculated, setCalculated] = useState(0);
   // const [them, dispatch] = useReducer(reducerTheme, intial);
@@ -32,7 +16,7 @@ function App() {
     "Sunday",
     "Monday",
     "Tuesday",
-    "Wednessday",
+    "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
@@ -43,7 +27,6 @@ function App() {
   }, [data.hoursOfSleep]);
   return (
     <>
-      <ThemeContext.Provider value={themes.dark}>
         <div className="container">
           <Header />
           <div className="ui placeholder segment">
@@ -53,7 +36,6 @@ function App() {
             </div>
           </div>
         </div>
-      </ThemeContext.Provider>
     </>
   );
 }
