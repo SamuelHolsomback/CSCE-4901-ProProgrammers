@@ -143,6 +143,18 @@ app.post('/get-eating-breast', (req, res)=> {
     });
 })
 
+app.post('/sleeping', (req, res)=> {
+    const day = req.body.daySet;
+    const hours = req.body.sleepSet;
+    const comments = req.body.commentSet;
+
+    db.query("INSERT INTO sleeping (Baby, Day, Hours, Comment) VALUES ('Test', ?, ?, ?)",
+    [day, hours, comments],
+    (err, result) => {
+        console.log(err);
+    });
+})
+
 app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
