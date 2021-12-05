@@ -1,4 +1,5 @@
 import React from "react";
+import Axios from 'axios';
 const Sleeping = ({ data, setData, options }) => {
   //Keeping data
 
@@ -16,6 +17,14 @@ const Sleeping = ({ data, setData, options }) => {
   const onClick = (e) => {
     e.preventDefault();
     console.log(data);
+
+    Axios.post("http://localhost:5000/sleeping", {
+      daySet: data.day,
+      sleepSet: data.hoursOfSleep,
+      commentSet: data.comments,
+    }).then((response) => {
+      console.log(response);
+    });
   };
 
   return (
